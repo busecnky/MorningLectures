@@ -1,0 +1,34 @@
+//Synchronized yapıyoruz ya burda bu işleyişi yavaşlatıyor. Bunu engellemek için
+		//multilock kullanırız.
+		//Buna örnek olarak hoca avm tuvaletlerini verdi.
+		//Bir ana kapı var ve içeride 5 adet kabin var diyelim
+		//Ana kapı sürekli her giren kitlerse 1 saat sürer belki 10 kişinin tuvalet kullanması
+		//Ama eğer ana kapı açık olursa 5 kabinin tamamı kullanılabileceğinden 10 dk sürer.
+		//İlk durum tek anahtar oluştuğu için ana kapıyı kitleyen anahtar gibi düşünebiliriz.
+		//Bir metotun başına public synchronized ... yazınca bütün yazdıklarımız kitlenmiş oluyo
+		//tek bir anahtarla.
+		
+		//Bu ikinci durum multilock bir sürü anahtar var her kapıya özel
+		//bunu nasıl yazıyoruz peki?
+		//private Object lock1 = new Object();   ---> bu sayede kilit üretmiş oluyoruz
+	
+	
+	
+	
+	
+	//Arraylistler thread safe değil
+	//Threadle aslında daha hızlı oluyor toplam süre
+	//ama arraylistlerin boyutları 1000 tane eklemek istiyorsak 975 966 falan oluyor.
+	//3600 milisaniye civarında sürüyor mesela
+	//Şansımıza 1000 çıkabilir ama 10 tane de 1 falan.
+	//Eğer arraylislere synchronized kullanmıyorsak bu sıkıntıyı yaşıyoruz
+	//Synchronized kullanırsak eğer 1000 eklemek istiyorsak size ımız 1000 olur
+	//Synchronized yaptığımız zaman 1000 ekledi her iki listeye ama yine 3600 milisaniye sürdü yine.
+	
+	//Synchronized yapmadığımız zamanlarda vector kullanmak daha yavaş (çok sayıda veride) belki ama
+	//thread safe en azından. 1000 eklemek istiyorsak 1000 tane ekliyoruz.
+	
+	
+	//Başında synchronized yazdığımız zaman bütün kilitler için tek bir anahtar kullanıyorsun.
+	
+	

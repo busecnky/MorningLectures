@@ -1,0 +1,110 @@
+
+postgreSQL de javanın aksine bütün her açtığımız başlıkları küçük harfle giriyoruz.
+
+
+Database de sağa tıkladık new create dedik dbtest açtık
+orda properties kısmında system database var açık yada kapalı şekilde
+biz açmadık çünkü biz user database oluşturduk şu an bu system database değil.
+
+sonra onun içinden public -> tables dan new create table dedik
+kisiler diye bi tablo oluşturduk
+
+ardından açılan sayfada tabloda hangi verileri tutmak istiyorsak onları dolduruyoruz
+
+--------------------------------------------------------------------------------------
+TABLO DOLDURMA
+
+Data Type
+buraya character integer falan seçebiliyoruz.
+örneğin tckimlikno için character seçtik
+yaş için integer seçtik
+
+ad ve soyad için:
+varchar diye bir datatype var normalde kullancaz ama bu seçeneklerde yok
+onun yerine character varying anlamına geldiği için bunu seçiyoruz.
+- Adı oluştururken neden character yerine character varying seçiyoruz??
+Çünkü ad için lengthe 20 yazdık.
+character seçmiş olsaydık veritabanındaki bütün adlar için 20lik yer açacak
+O zaman ali 3 character kullansa bile geriye kalan character için yer açıyor.
+Ama character varying seçtiğimiz zaman ne kadar character kullanırsan sen o kadar yer açıyor.
+Örn ali yazdığımızda geriye kalan 17lik kısmı görmezden geliyor ve bu şekilde hafıza şişmiyor.
+
+
+
+length/precision
+biz buraya ne uzunlukta gireceksek verileri onu yazıyoruz
+
+not null? 
+evet dersek eğer boş veri girmemize izin vermez
+başka bi durumda dolu olsun olmasın farketmezse not null? kısmını seçmesekte olur.
+
+primary key?
+Unique değerler girmemizi sağlar.
+bu oluşturduğumuz sütunda örn tckimlikno iki tane aynı değer giremezsin anlamına geliyor.
+Eğer primary key i seçmezsen aynı numarayı atabilir.
+
+default
+default herhangi bir değer girilecekse dolduruyoruz
+Örn boş bir değer kalmasın onları default a yazdığımızla doldur diyoruz.
+tckimlikno için seçemeyiz ama tcsi yoksa sen onun yerine 11111111111 gir diyemezsin!
+örneğin yaş için default 0 girersek eğer daha sonra tabloya dönüp baktığımızda
+yaş girmemiş olanlar 0 olacağı için onları rahalıkla bulabiliriz.
+
+--------------------------------------------------------------------------------------
+
+
+Tools --> Query Tool
+
+biz bütün işlemleri burdan yapacağız.
+Aşağıdaki quert tool dan yukarıda yaptığımız yeni tablo oluşturmanın manuel hali
+
+create table malzeme
+(
+	id int primary key not null,			//primary key olsun not null olsun demek
+	ad varchar (15) not null,				//varchar = character varying
+	marka varchar(20),
+	stoksayisi int,
+	lokasyon varchar(25)
+)
+
+
+
+play tuşu ile çalıştırdık diyelim
+
+Query returnes successfully in 90 msec.   yazarsa başarıyla oluşturulmuştur tablo.
+
+Sonra baktın sol tarafa gelmedi neden gelmedi.
+Eclipseteki gibi refresh yapmamız lazım.
+Sonra tablonun üzerine gelip sağ tıklayıp -->  properties dersek --> columns
+oluşturduğumuz tablonun özelliklerini aynı şekilde görürüz.
+
+**********
+
+create table urun
+(
+	id int primary key not null,			
+	ad varchar (15) not null,				
+	marka varchar(20),
+	stoksayisi int,
+	lokasyon character VARYING(25)  //bu şekilde de yazabiliriz postgreSQLde olur.
+)
+
+
+ama bunu bu şekilde yazarsak sadece postgre de kabul oluyor.
+Oracle, Microsoft SQLServer da falan olmuyor.
+
+O yüzden universal olan varchar ve biz de bunu kullanacağız.
+
+--------------------------------------------------------------------------------------
+COMMENT İÇİN	
+comment yapmak için başına -- yapıyorsun
+
+toplu halde comment yapmak istiyorsan seçiyorsun yukarıdaki kalemden 
+yani edit tuşundan toggle comment diyorsun ya da ctrl+/ basıyorsun.
+
+--------------------------------------------------------------------------------------
+ALTER
+
+alter table kisiler add sinavnotu int
+
+diyip run a basarsak eğer kisiler tablosuna ekleme yapar
